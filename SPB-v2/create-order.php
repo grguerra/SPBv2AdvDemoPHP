@@ -38,7 +38,7 @@ class PaypalCheckout{
         	$postfieldsArr['application_context']['user_action'] = "PAY_NOW";
         	
         	$postfieldsArr['purchase_units'][0]['description'] = "PayPalPizza";
-        	$postfieldsArr['purchase_units'][0]['description'] = "INV-PayPalPizza-" . $randNo;
+        	$postfieldsArr['purchase_units'][0]['invoice_id'] = "INV-PayPalPizza-" . $randNo;
         	$postfieldsArr['purchase_units'][0]['amount']['currency_code'] = $_POST['currency'];
         	$postfieldsArr['purchase_units'][0]['amount']['value'] = $_POST['total_amt'];
         	$postfieldsArr['purchase_units'][0]['amount']['breakdown']['item_total']['currency_code'] = $_POST['currency'];
