@@ -190,16 +190,17 @@
             
             // Create Order Function  
             createOrder: function() {
-            
-              //Get the cart details            
+              
+            //Get the cart details            
               var prices = document.getElementsByClassName("price");
               var names = document.getElementsByClassName("name");
               var sku = document.getElementsByClassName("sku");
               var amounts = document.getElementsByClassName("amount");
-              var num = 0;
+              
               
               // Populate the postData with the transaction details
               let
+                num = 0,
                 countrySelect = document.getElementById("countrySelect"),
                 total_amt = document.getElementById("totalamt").innerHTML,
                 postData = new FormData();
@@ -223,7 +224,7 @@
                   postData.append(('itemamount' + a), amounts[a].value);
                   }
                 }
-                postData.append('itemnum', num);
+                
               
               // Create the Order
               return fetch('SPB-v2/create-order.php', {
@@ -231,7 +232,10 @@
                     body: postData
                 }
             ).then(function(res) {
+                 
                   return res.json();
+                
+              
                 }).then(function(data) {
                   return data.id;
                 });
