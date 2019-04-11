@@ -48,7 +48,7 @@ document.addEventListener('click', function (event) {
 	else if (event.target.matches('#checkout')){
 		
 		if(total == 0){
-			alert("You haven't choose anything yet!");
+			alert("You haven't chosen anything yet!");
 		}
 		else{
 			UpdateTotal();
