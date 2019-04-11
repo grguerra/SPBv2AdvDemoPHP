@@ -7,14 +7,13 @@ $accessToken = $token->getToken();
 
 $paypalCheckout = new PaypalCheckout();
 $paypalCheckout->captureOrder($accessToken);
- 
 
 /* Class to Capture the Order */
 class PaypalCheckout{
 
    public function captureOrder($accessToken){
  
-   $orderId = $_POST['orderId'];
+   $orderId = $_GET['orderId'];
    $url = "https://api.sandbox.paypal.com/v2/checkout/orders/".$orderId."/capture";
 
    $paymentHeaders = array("Content-Type: application/json", "Authorization: Bearer ".$accessToken,"PayPal-Request-Id: 7b92603e-77ed-4896-8e78-5dea2050476a");
