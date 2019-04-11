@@ -11,7 +11,23 @@ $accessToken = $token->getToken();
 /* Generates Random Invoice Number */
 $randNo= (string)rand(10000,20000);
 
-/* Fill payload with transaction info */
+$paypalCheckout = new PaypalCheckout();
+$paypalCheckout->createOrder($accessToken);
+
+/* Class to Create Order */
+class PaypalCheckout{
+    
+    
+
+  public function createOrder($accessToken, $postfields){
+
+   /* PayPal Sandbox Environment */
+   $url = "https://api.sandbox.paypal.com/v2/checkout/orders";
+   
+   /* Call Headers */
+   $paymentHeaders = array("Content-Type: application/json", "Authorization: Bearer ".$accessToken);
+ 
+   /* Fill payload with transaction info */
 
 			$postfields = '{}';
             $postfieldsArr = json_decode($postfields, true);
@@ -45,30 +61,12 @@ $randNo= (string)rand(10000,20000);
             }
             
             $postfields = json_encode($postfieldsArr);
-
-$paypalCheckout = new PaypalCheckout();
-$paypalCheckout->createOrder($accessToken);
-
-/* Class to Create Order */
-class PaypalCheckout{
-    
-    
-
-  public function createOrder($accessToken, $postfields){
-
-   /* PayPal Sandbox Environment */
-   $url = "https://api.sandbox.paypal.com/v2/checkout/orders";
-   
-   /* Call Headers */
-   $paymentHeaders = array("Content-Type: application/json", "Authorization: Bearer ".$accessToken);
- 
-   $payload = $postfields;
     
 /* Call Orders API */
    $ch = curl_init();
    curl_setopt($ch, CURLOPT_URL, $url);
    curl_setopt($ch, CURLOPT_HTTPHEADER, $paymentHeaders);
-   curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+   curl_setopt($ch, CURLOPT_POSTFIELDS, $postfields);
    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
