@@ -14,7 +14,7 @@ $orderId = $_POST['orderId'];
 /* Class to Capture the Order */
 class PaypalCheckout{
 
-   public function captureOrder($accessToken){
+   public function captureOrder($accessToken, $orderId){
  
    $id = $orderId;
    $url = "https://api.sandbox.paypal.com/v2/checkout/orders/".$id."/capture";

@@ -54,7 +54,7 @@ class PaypalCheckout{
     
     
 
-  public function createOrder($accessToken){
+  public function createOrder($accessToken, $postfields){
 
    /* PayPal Sandbox Environment */
    $url = "https://api.sandbox.paypal.com/v2/checkout/orders";
