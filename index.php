@@ -196,11 +196,11 @@
               var names = document.getElementsByClassName("name");
               var sku = document.getElementsByClassName("sku");
               var amounts = document.getElementsByClassName("amount");
-              
+              var num = 0;
               
               // Populate the postData with the transaction details
               let
-                num = 0,
+                
                 countrySelect = document.getElementById("countrySelect"),
                 total_amt = document.getElementById("totalamt").innerHTML,
                 postData = new FormData();
@@ -217,13 +217,14 @@
                 // Add the valid item details
                 for(var a = 0; a < prices.length; ++a){
                 if(prices[a].parentElement.parentElement.style.display != 'none'){
+                  postData.append(('itemname' + num), names[a].innerHTML);
+                  postData.append(('itemsku' + num), sku[a].innerHTML);
+                  postData.append(('itemprice' + num), prices[a].innerHTML);
+                  postData.append(('itemamount' + num), amounts[a].value);
                   num++;
-                  postData.append(('itemname' + a), names[a].innerHTML);
-                  postData.append(('itemsku' + a), sku[a].innerHTML);
-                  postData.append(('itemprice' + a), prices[a].innerHTML);
-                  postData.append(('itemamount' + a), amounts[a].value);
                   }
                 }
+				postData.append('itemnum', num);
                 
               
               // Create the Order
