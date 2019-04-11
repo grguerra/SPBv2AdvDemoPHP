@@ -43,6 +43,8 @@ class PaypalCheckout{
         	$postfieldsArr['purchase_units'][0]['amount']['value'] = $_POST['total_amt'];
         	$postfieldsArr['purchase_units'][0]['amount']['breakdown']['item_total']['currency_code'] = $_POST['currency'];
         	$postfieldsArr['purchase_units'][0]['amount']['breakdown']['item_total']['value'] = $_POST['total_amt'];
+			$postfieldsArr['purchase_units'][0]['shipping']['address']['recipient_name']= $_POST['shipping_recipient_name'];
+			$postfieldsArr['purchase_units'][0]['shipping']['address']['phone']= $_POST['shipping_phone'];
             $postfieldsArr['purchase_units'][0]['shipping']['address']['address_line_1']= $_POST['shipping_line1'];
             $postfieldsArr['purchase_units'][0]['shipping']['address']['address_line_2']= $_POST['shipping_line2'];
             $postfieldsArr['purchase_units'][0]['shipping']['address']['admin_area_2']= $_POST['shipping_city'];

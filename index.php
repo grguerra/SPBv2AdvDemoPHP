@@ -206,6 +206,7 @@
                 postData = new FormData();
                 postData.append('total_amt',total_amt);
                 postData.append('currency','USD');
+				postData.append('shipping_phone',document.getElementById("inputPhone").value);
                 postData.append('shipping_recipient_name',(document.getElementById("inputFirstName").value + " " + document.getElementById("inputLastName").value));
                 postData.append('shipping_line1',document.getElementById("inputAddress").value);
                 postData.append('shipping_line2',document.getElementById("inputAddress2").value);
