@@ -19,7 +19,7 @@ class PaypalCheckout{
     
     
 
-  public function createOrder($accessToken, $postfields){
+  public function createOrder($accessToken){
 
    /* PayPal Sandbox Environment */
    $url = "https://api.sandbox.paypal.com/v2/checkout/orders";
@@ -70,6 +70,7 @@ class PaypalCheckout{
    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+   curl_setopt($ch, CURLOPT_VERBOSE, 1);
    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
    curl_setopt($ch, CURLOPT_POST, true);
    $run = curl_exec($ch);
