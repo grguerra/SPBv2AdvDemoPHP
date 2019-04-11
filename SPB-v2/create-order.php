@@ -8,8 +8,7 @@ $token = new Token();
 $accessToken = $token->getToken();
 /* GetToken */
 
-/* Generates Random Invoice Number */
-$randNo= (string)rand(10000,20000);
+
 
 $paypalCheckout = new PaypalCheckout();
 $paypalCheckout->createOrder($accessToken);
@@ -26,6 +25,9 @@ class PaypalCheckout{
    
    /* Call Headers */
    $paymentHeaders = array("Content-Type: application/json", "Authorization: Bearer ".$accessToken);
+ 
+	/* Generates Random Invoice Number */
+	$randNo= (string)rand(10000,20000);
  
    /* Fill payload with transaction info */
 
