@@ -8,30 +8,12 @@ $token = new Token();
 $accessToken = $token->getToken();
 /* GetToken */
 
+/* Generates Random Invoice Number */
+$randNo= (string)rand(10000,20000);
 
+/* Fill payload with transaction info */
 
-$paypalCheckout = new PaypalCheckout();
-$paypalCheckout->createOrder($accessToken);
-
-/* Class to Create Order */
-class PaypalCheckout{
-    
-    
-
-  public function createOrder($accessToken){
-
-   /* PayPal Sandbox Environment */
-   $url = "https://api.sandbox.paypal.com/v2/checkout/orders";
-   
-   /* Call Headers */
-   $paymentHeaders = array("Content-Type: application/json", "Authorization: Bearer ".$accessToken);
-   
-   
-    /* Generates Random Invoice Number */
-    $randNo= (string)rand(10000,20000);
-    $postfields = '{}';
-
-            /* Fill payload with transaction info */
+			$postfields = '{}';
             $postfieldsArr = json_decode($postfields, true);
             $postfieldsArr['intent'] = "CAPTURE";
         	$postfieldsArr['application_context']['shipping_preference'] = "SET_PROVIDED_ADDRESS";
@@ -64,17 +46,32 @@ class PaypalCheckout{
             
             $postfields = json_encode($postfieldsArr);
 
+$paypalCheckout = new PaypalCheckout();
+$paypalCheckout->createOrder($accessToken);
 
+/* Class to Create Order */
+class PaypalCheckout{
+    
+    
+
+  public function createOrder($accessToken){
+
+   /* PayPal Sandbox Environment */
+   $url = "https://api.sandbox.paypal.com/v2/checkout/orders";
+   
+   /* Call Headers */
+   $paymentHeaders = array("Content-Type: application/json", "Authorization: Bearer ".$accessToken);
+ 
+   $payload = $postfields;
     
 /* Call Orders API */
    $ch = curl_init();
    curl_setopt($ch, CURLOPT_URL, $url);
    curl_setopt($ch, CURLOPT_HTTPHEADER, $paymentHeaders);
-   curl_setopt($ch, CURLOPT_POSTFIELDS, $postfields);
+   curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-   curl_setopt($ch, CURLOPT_VERBOSE, 1);
    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
    curl_setopt($ch, CURLOPT_POST, true);
    $run = curl_exec($ch);
